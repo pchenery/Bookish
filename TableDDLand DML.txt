@@ -1,0 +1,78 @@
+create table Books
+	(ISBN nvarchar(14) not null primary key,
+	Title nvarchar(100) not null)
+
+create table Authors
+	(AuthorID integer identity primary key,
+	Firstname nvarchar(30) not null,
+	Surname nvarchar(30) not null)
+
+create table AuthorBook
+	(ID integer identity,
+	AuthorID integer not null,
+	ISBN nvarchar(14) not null) 
+
+create table BookCopy
+	(Barcode integer not null primary key,
+	ISBN nvarchar(14) not null)
+
+create table Users
+	(UserID integer identity primary key,
+	Username nvarchar(20) not null,
+	Firstname nvarchar(30) not null,
+	Surname nvarchar(30) not null,
+	Birthdate date,
+	Emailaddress nvarchar(150) not null,
+	Password nvarchar(20) not null)
+
+create table OnLoan
+	(Barcode integer primary key,
+	UserID integer not null,
+	Loandate date not null,
+	Duedate date not null,
+	Returndate date)
+
+create sequence dbo.barcode as integer start with 1234500000
+
+	alter table Authorbook
+	add constraint fk_AB_Books foreign key (ISBN)
+		references Books(ISBN),
+	constraint fk_AB_Author foreign key (AuthorID)
+		references Authors(AuthorID)
+
+	alter table BookCopy
+	add	constraint fk_BookCopy_Book foreign key (ISBN)
+		references Books(ISBN)
+
+	alter table OnLoan
+	add constraint fk_OnLoan_Users foreign key (UserID)
+		references Users(UserID),
+	constraint fk_OnLoan_Barcode foreign key (Barcode)
+		references BookCopy(Barcode)
+
+insert into dbo.Books values ('978-9538782081', 'Frankenstein')
+insert into dbo.Books values ('978-8675429455', 'The Trial')
+insert into dbo.Books values ('978-9176374474', 'Metamorphosis')
+insert into dbo.Books values ('978-1449324452', 'Oracle PL/SQL Programming')
+
+insert into dbo.Authors values ('Mary', 'Shelley')
+insert into dbo.Authors values ('Franz', 'Kafka')
+insert into dbo.Authors values ('Steven', 'Feuerstein')
+insert into dbo.Authors values ('Bill', 'Pribyl')
+
+insert into dbo.AuthorBook values (1, '978-9538782081')
+insert into dbo.AuthorBook values (2, '978-8675429455')
+insert into dbo.AuthorBook values (2, '978-9176374474')
+insert into dbo.AuthorBook values (3, '978-1449324452')
+insert into dbo.AuthorBook values (4, '978-1449324452')
+
+insert into bookcopy values (next value for barcode, '978-9538782081')
+insert into bookcopy values (next value for barcode, '978-9538782081')
+insert into bookcopy values (next value for barcode, '978-8675429455')
+insert into bookcopy values (next value for barcode, '978-9176374474')
+insert into bookcopy values (next value for barcode, '978-1449324452')
+
+insert into users values('aardvark', 'Peter', 'Chenery', '1970-01-01', 'abc@tls.com', 'aardvark')
+insert into users values('emu', 'Robert', 'Defered', '1985-03-30', 'rd@ntl.com', 'emu')
+
+insert into OnLoan (Barcode, UserID, Loandate, Duedate) values(1234500001, 1, '2017-10-18', '2017-11-01')
