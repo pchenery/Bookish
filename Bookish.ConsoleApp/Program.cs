@@ -12,8 +12,9 @@ namespace Bookish.ConsoleApp
         static void Main(string[] args)
         {
             BookRepository library = new BookRepository();
-            List<Book> ourBooks = library.AllBooks();
-            
+            //List<Book> ourBooks = library.AllBooks();
+            List<Book> ourBooks = library.MyBooksOnLoan("aardvark");
+
             foreach (var book in ourBooks)
             {
                 Console.WriteLine(new string('-', 20));
