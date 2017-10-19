@@ -1,6 +1,7 @@
 create table Books
 	(ISBN nvarchar(14) not null primary key,
-	Title nvarchar(100) not null)
+	Title nvarchar(100) not null,
+	Copies smallint)
 
 create table Authors
 	(AuthorID integer identity primary key,
