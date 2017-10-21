@@ -12,8 +12,8 @@ namespace Bookish.ConsoleApp
         static void Main(string[] args)
         {
             BookRepository library = new BookRepository();
-            //List<Book> ourBooks = library.AllBooks();
-            List<Book> ourBooks = library.MyBooksOnLoan("aardvark");
+            List<Book> ourBooks = library.AllBooks();
+            //List<Book> ourBooks = library.MyBooksOnLoan("aardvark");
 
             foreach (var book in ourBooks)
             {

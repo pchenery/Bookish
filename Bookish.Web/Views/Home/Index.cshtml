@@ -1,0 +1,30 @@
+﻿@model Bookish.Web.Models.BookViewModel
+@{
+    ViewBag.Title = "My Books On Loan";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<table style="width:100%">
+    <tr>
+        <th>ISBN</th>
+        <th>Title</th>
+        <th>Barcode</th>
+        <th>Loan Date</th>
+        <th>Due Date</th>
+    </tr>
+
+    <tbody>
+    @foreach (var item in Model.myBooks)
+    {
+        <tr>
+            <td>@item.ISBN</td>
+            <td>@item.Title</td>
+            <td>@item.Barcode</td>
+            <td>@item.Loandate</td>
+            <td>@item.Duedate</td>
+            <!--More properties-->
+        </tr>
+    }
+    </tbody>
+</table>
