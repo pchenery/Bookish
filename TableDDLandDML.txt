@@ -19,7 +19,6 @@ create table BookCopy
 
 create table Users
 	(UserID integer identity primary key,
-	Username nvarchar(20) not null,
 	Firstname nvarchar(30) not null,
 	Surname nvarchar(30) not null,
 	Birthdate date,
@@ -73,7 +72,8 @@ insert into bookcopy values (next value for barcode, '978-8675429455')
 insert into bookcopy values (next value for barcode, '978-9176374474')
 insert into bookcopy values (next value for barcode, '978-1449324452')
 
-insert into users values('aardvark', 'Peter', 'Chenery', '1970-01-01', 'abc@tls.com', 'aardvark')
-insert into users values('emu', 'Robert', 'Defered', '1985-03-30', 'rd@ntl.com', 'emu')
+insert into users values('Peter', 'Chenery', '1970-01-01', 'abc@tls.com', 'aardvark')
+insert into users values('Robert', 'Defered', '1985-03-30', 'rd@ntl.com', 'emu')
 
 insert into OnLoan (Barcode, UserID, Loandate, Duedate) values(1234500001, 1, '2017-10-18', '2017-11-01')
+insert into OnLoan (Barcode, UserID, Loandate, Duedate) values(1234500003, 1, '2017-10-24', '2017-11-08')
